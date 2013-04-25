@@ -11,7 +11,7 @@ post '/verify' do
   if @user == nil
     erb :user_not_found
   else
-    session[:value] = 'logged in'
+    session[:logged_in] = true
     erb :verify 
   end
 end    
@@ -27,12 +27,12 @@ post '/create' do
 end
 
 get '/logout' do
-  session[:value] = nil
+  session[:logged_in] = false
   redirect to '/'
 end
 
 get '/vip' do
-  if session[:value] == 'logged in'
+  if session[:logged_in] == true
     erb :vip
   else
     erb :index
